@@ -1,32 +1,25 @@
 <template>
-<div class="app">
-  <p v-if="contents<0">Loading...</p>
-  <div v-else>
-    <div>
-      <div v-for="content in contents" :key ="content.id">
-        {{ content.phrase_en }}
-        {{ content.phrase_ja }}
-        {{ content.word_en }}
-      </div>
-    </div>
+  <div>
+    <DisplayContents v-bind:contents="contents"></DisplayContents>
   </div>
-</div>
 </template>
 
 <script>
 import axios from 'axios'
+import DisplayContents from './components/DisplayContents.vue'
 
 export default {
-  name:'app',
 
-//API格納用のプロパティ
-  data(){
+  data: function(){
     return{
       contents: null,
     }
   },
+  components:{
+    DisplayContents
+  },
 
-//axiosによるデータ取得処理
+  //axiosによるデータ取得処理
   created: function(){
     axios.get('http://localhost:8000/api/')
     .then(function(response){
