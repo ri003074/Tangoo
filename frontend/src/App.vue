@@ -1,6 +1,6 @@
 <template>
 <div class="app">
-  <p v-if="loading">Loading...</p>
+  <p v-if="contents<0">Loading...</p>
   <div v-else>
     <div>
       <div v-for="content in contents" :key ="content.id">
@@ -23,7 +23,6 @@ export default {
   data(){
     return{
       contents: null,
-      loading:true,
     }
   },
 
@@ -31,17 +30,15 @@ export default {
   created: function(){
     axios.get('http://localhost:8000/api/')
     .then(function(response){
-        //デバッグ用にconsoleに出力
-        console.log(response.data)
         this.contents = response.data
     }.bind(this))
+    .then (function(){
+    })
     .catch(function(error){
         console.log(error)
     })
   },
   mounted: function(){
-    this.loading=false
-    console.log(this.load)
   }
 }  
 </script>
