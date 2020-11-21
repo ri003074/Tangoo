@@ -21,9 +21,11 @@ export default {
 
   //axiosによるデータ取得処理
   created: function(){
+    console.log("axios")
     axios.get('http://localhost:8000/api/')
     .then(function(response){
         this.contents = response.data
+        console.log(this.contents)
     }.bind(this))
     .then (function(){
     })

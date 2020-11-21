@@ -12,7 +12,7 @@
 export default {
     props:{
         contents:{
-            type:Object,
+            type:Array,
         }
     }    
 }
