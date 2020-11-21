@@ -1,22 +1,23 @@
 <template>
   <div>
-    <DisplayContents v-bind:contents="contents"></DisplayContents>
+    <HeaderDisplay> </HeaderDisplay> 
+    <router-view :contents = 'contents'></router-view>  
   </div>
 </template>
 
 <script>
+import 'normalize.css'
 import axios from 'axios'
-import DisplayContents from './components/DisplayContents.vue'
+import HeaderDisplay from './components/HeaderDisplay.vue'
 
 export default {
 
   data: function(){
-    return{
+    return {
       contents: null,
     }
   },
-  components:{
-    DisplayContents
+  components:{ HeaderDisplay
   },
 
   //axiosによるデータ取得処理
@@ -26,25 +27,20 @@ export default {
     .then(function(response){
         this.contents = response.data
         console.log(this.contents)
-    }.bind(this))
-    .then (function(){
-    })
+    }
+    .bind(this))
     .catch(function(error){
         console.log(error)
     })
   },
-  mounted: function(){
-  }
 }  
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+/* $main_moji_color : #FFF;
+$sub_moji_color:#8899A6;
+$main_background_color:#15202B;
+$sub_background_color:#192734; */
+
+  
 </style>
