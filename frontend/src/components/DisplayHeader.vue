@@ -19,8 +19,23 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
   </nav>
 </template>
+
+<style lang="scss" scoped>
+    .navbar{
+        background-color:$main_background_color;
+        & a{
+            color:$main_moji_color;
+            :hover{
+                color:$main_moji_color;
+            }
+        }
+        .btn{
+            color:$main_moji_color;
+        }
+    }
+</style>

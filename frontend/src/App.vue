@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <HeaderDisplay> </HeaderDisplay> 
+  <div class="app">
+    <DisplayHeader> </DisplayHeader> 
     <router-view :contents = 'contents'></router-view>  
   </div>
 </template>
@@ -8,7 +8,7 @@
 <script>
 import 'normalize.css'
 import axios from 'axios'
-import HeaderDisplay from './components/HeaderDisplay.vue'
+import DisplayHeader from './components/DisplayHeader.vue'
 
 export default {
 
@@ -17,7 +17,7 @@ export default {
       contents: null,
     }
   },
-  components:{ HeaderDisplay
+  components:{ DisplayHeader
   },
 
   //axiosによるデータ取得処理
@@ -36,11 +36,10 @@ export default {
 }  
 </script>
 
-<style lang="scss">
-/* $main_moji_color : #FFF;
-$sub_moji_color:#8899A6;
-$main_background_color:#15202B;
-$sub_background_color:#192734; */
+<style lang="scss" scoped>
 
+.app{
+    font-family: 'Courier New', Courier, monospace;
+}
   
 </style>

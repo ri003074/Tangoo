@@ -1,17 +1,9 @@
 <template>
-    <div>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Phrase</th>
-          <th>Japanese</th>
-          <th>word</th>
-        </tr>
-      </thead>
+    <div class="display-contents">
+    <table class="table">
       <tbody>
         <tr v-for="content in contents" v-bind:key=content.id>
-          <th scope="row">{{ content.id }}</th>
+          <td>{{ content.id }}</td>
           <td>{{ content.phrase_en }}</td>
           <td>{{ content.phrase_ja }}</td>
           <td>{{ content.word_en }}</td>
@@ -32,8 +24,9 @@ export default {
 }
 </script>
 
-<style >
-   body{
-       background-color: black;
-   } 
+<style scoped lang="scss">
+  .table{
+    background-color:$main_background_color;
+    color:$main_moji_color;
+  }
 </style>
