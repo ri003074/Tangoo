@@ -25,8 +25,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .table{
-    background-color:$main_background_color;
-    color:$main_moji_color;
-  }
 </style>

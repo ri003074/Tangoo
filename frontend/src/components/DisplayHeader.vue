@@ -26,16 +26,4 @@
 </template>
 
 <style lang="scss" scoped>
-    .navbar{
-        background-color:$main_background_color;
-        & a{
-            color:$main_moji_color;
-            :hover{
-                color:$main_moji_color;
-            }
-        }
-        .btn{
-            color:$main_moji_color;
-        }
-    }
 </style>

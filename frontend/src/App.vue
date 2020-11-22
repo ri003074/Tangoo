@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div>
     <DisplayHeader> </DisplayHeader> 
     <router-view :contents = 'contents'></router-view>  
   </div>
@@ -36,10 +36,23 @@ export default {
 }  
 </script>
 
-<style lang="scss" scoped>
-
-.app{
+<style lang="scss">
+* {
+    color:$main_moji_color;
     font-family: 'Courier New', Courier, monospace;
+    background-color: $main_background_color;;
 }
+a {
+//TODO 何故必要かわからない
+  color:$main_moji_color;
+  &:hover {
+    color:$sub_moji_color;
+  }
+}
+//TODO 何故必要かわからない
+.btn{
+  color:$main_moji_color;
+}
+
   
 </style>
