@@ -10,8 +10,9 @@ Vue.use(Router)
 export default new Router({
     mode: "history",
     routes: [
-        { path: "/", component: DisplayContents, props:true},
-        { path: "/quiz", component: Quiz},
-        { path: "/add", component: AddContent},
+        { path: "/", component: DisplayContents, props:true },
+        { path: "/quiz", component: Quiz },
+        { path: "/add", component: AddContent },
+        { path: "*", redirect: "/" } 
     ]
 })
