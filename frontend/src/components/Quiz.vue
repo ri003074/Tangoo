@@ -1,3 +1,5 @@
 <template>
-    <div>Quiz</div>
+    <div style="text-align:center;">
+        Quiz
+    </div>
 </template>
