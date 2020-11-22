@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DisplayHeader> </DisplayHeader> 
+    <DisplayHeader></DisplayHeader> 
     <router-view :contents = 'contents'></router-view>  
   </div>
 </template>
@@ -17,21 +17,23 @@ export default {
       contents: null,
     }
   },
-  components:{ DisplayHeader
+  components: { 
+    DisplayHeader
   },
 
   //axiosによるデータ取得処理
   created: function(){
     console.log("axios")
-    axios.get('http://localhost:8000/api/')
-    .then(function(response){
+    axios
+      .get('http://localhost:8000/api/')
+      .then(function(response){
         this.contents = response.data
         console.log(this.contents)
-    }
-    .bind(this))
-    .catch(function(error){
+      }
+      .bind(this))
+      .catch(function(error){
         console.log(error)
-    })
+      })
   },
   methods:{
   }

@@ -1,5 +1,5 @@
 <template>
-    <div class="display-contents">
+  <div class="display-contents">
     <table class="table">
       <tbody>
         <tr v-for="content in contents" v-bind:key=content.id>
@@ -10,17 +10,16 @@
         </tr>
       </tbody>
     </table>
-    </div>
-  
+  </div>
 </template>
 
 <script>
 export default {
-    props:{
-        contents:{
-            type:Array,
-        }
-    },
+  props:{
+    contents:{
+      type:Array,
+    }
+  },
 }
 </script>
 
