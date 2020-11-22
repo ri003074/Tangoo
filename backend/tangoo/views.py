@@ -3,11 +3,11 @@ from .models import Tangoo
 from .serializers import TangooSerializer
 
 
-class ListTangoo(generics.ListAPIView):
+class ListTangoo(generics.ListCreateAPIView):
     queryset = Tangoo.objects.all()
     serializer_class = TangooSerializer
 
 
-class DetailTangoo(generics.RetrieveAPIView):
+class DetailTangoo(generics.RetrieveUpdateDestroyAPIView):
     queryset = Tangoo.objects.all()
     serializer_class = TangooSerializer

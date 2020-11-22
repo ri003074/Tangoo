@@ -11,7 +11,7 @@
           <router-link to  = '/' class="nav-link" >Home <span class="sr-only">(current)</span></router-link>
         </li>
         <li class="nav-item">
-          <router-link to='/' class="nav-link">All</router-link>
+          <router-link to='/add' class="nav-link">Add</router-link>
         </li>
         <li class="nav-item">
           <router-link to='/quiz' class="nav-link">Quiz</router-link>
