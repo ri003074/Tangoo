@@ -13,6 +13,7 @@ export default {
     data: function(){
         return {
             missCount:0,
+            pageStatus:'playing',
         }
     },
     props:{
@@ -51,19 +52,33 @@ export default {
         keydown(event){
             console.log("keydown!")
             console.log(event.key)
+            console.log(event.keyCode)
             console.log(this.loc)
             const content = this.contents_quiz[this.randomNum]
-            if(content.word_en[this.loc] == event.key){
-                this.$emit("update-quiz-blank")
+            if(this.pageStatus=='playing'){
 
-                if(this.loc == content.word_en.length-1){
-                    this.updateCounterValue(this.missCount)
-                    this.$emit("next-quiz")
+                if(content.word_en[this.loc] == event.key){
+                    this.$emit("update-quiz-blank")
+
+                    if(this.loc == content.word_en.length-1){
+                        this.updateCounterValue(this.missCount)
+                        this.missCount=0
+                        this.pageStatus='stop'
+                        console.log("set page status to stop")
+                        // this.$emit("next-quiz")
+                    }
+
+                }else{
+                    console.log("miss")
+                    this.missCount++;
                 }
-
             }else{
-                console.log("miss")
-                this.missCount++;
+                console.log("else")
+                if(event.keyCode==32){
+                    this.$emit("next-quiz")
+                        this.pageStatus='playing'
+
+                }
             }
         }
     },
