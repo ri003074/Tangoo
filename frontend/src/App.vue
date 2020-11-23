@@ -61,7 +61,7 @@ export default {
   },
   methods:{
     setRandomNum(){
-        this.randomNum = Math.floor(Math.random() * this.contents.length)
+      this.randomNum = Math.floor(Math.random() * this.contents.length)
     },
     updateQuizBlank(){
       const content = this.contents_quiz[this.randomNum]
@@ -75,18 +75,18 @@ export default {
       this.loc = 0;
     },
     setUpdatedCounterValue(...args){ //update s,c counter value from child component
-        const [sCounter, cCounter, id] = args
-        this.arrNum = this.contents.findIndex( x => x.id===id) //get array number from id
-        this.contents[this.arrNum].s_counter = sCounter
-        this.contents[this.arrNum].c_counter = cCounter
+      const [sCounter, cCounter, id] = args
+      this.arrNum = this.contents.findIndex( x => x.id===id) //get array number from id
+      this.contents[this.arrNum].s_counter = sCounter
+      this.contents[this.arrNum].c_counter = cCounter
     },
 
     updataDatabase(){
-        var data = this.contents[this.arrNum] // data for updte
-        axios
-          .put("http://localhost:8000/api/" + data.id + "/", data)
-          .then(function(response){
-            console.log(response.data)
+      var data = this.contents[this.arrNum] // data for updte
+      axios
+        .put("http://localhost:8000/api/" + data.id + "/", data)
+        .then(function(response){
+          console.log(response.data)
         })
     }
   },

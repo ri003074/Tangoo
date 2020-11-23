@@ -5,11 +5,6 @@
         <div class="quiz">{{ contents_quiz[randomNum].phrase_quiz }}</div>
         <div class="quiz quiz_answer">{{ contents_quiz[randomNum].word_blank }}</div>
 
-        <!-- <div>{{ contents[0].phrase_en }}</div>
-        <div>{{ contents[0].word_en }}</div>
-        <div>{{ contents[0].c_counter }}</div>
-        <div>{{ contents[0].s_counter }}</div>
-        <button @click="updateDatabase">btn</button> -->
 
     </div>
 </div>
