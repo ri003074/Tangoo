@@ -2,11 +2,11 @@
   <div class="display-contents">
     <table class="table">
       <tbody>
-        <tr v-for="content in contents" v-bind:key=content.id>
-          <td>{{ content.id }} ({{ (content.c_counter / content.s_counter)*100 }}%)</td>
-          <td>{{ content.phrase_en }}</td>
-          <td>{{ content.phrase_ja }}</td>
-          <td>{{ content.word_en }}</td>
+        <tr v-for="(content,index) in contents" v-bind:key=content.id>
+          <td style="width:17%;text-align:center;">{{ ('000' + index).slice(-3) }} ({{ ((content.c_counter / content.s_counter)*100).toFixed(1) }}%)</td>
+          <td style="width:29%;">{{ content.phrase_en }}</td>
+          <td style="width:29%;">{{ content.phrase_ja }}</td>
+          <td style="width:29%;">{{ content.word_en }}</td>
         </tr>
       </tbody>
     </table>

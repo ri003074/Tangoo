@@ -14,6 +14,7 @@
 export default {
     data: function(){
         return {
+            missCount:0,
         }
     },
     props:{
@@ -41,10 +42,13 @@ export default {
     computed:{
     },
     methods:{
-        updateDatabase(){
+        updateCounterValue(miss){
             const content = this.contents[this.randomNum]
-
-            this.$emit("update-database", content.s_counter+1, 2, content.id)//s_counter, c_counter, id
+            if(miss>1){
+                this.$emit("update-counter-value", content.s_counter+1, content.c_counter, content.id)//s_counter, c_counter, id
+            }else{
+                this.$emit("update-counter-value", content.s_counter+1, content.c_counter+1, content.id)//s_counter, c_counter, id
+            }
         },
         keydown(event){
             console.log("keydown!")
@@ -54,13 +58,14 @@ export default {
             if(content.word_en[this.loc] == event.key){
                 this.$emit("update-quiz-blank")
 
-                if( this.loc == content.word_en.length-1 ){
-                    this.updateDatabase()
+                if(this.loc == content.word_en.length-1){
+                    this.updateCounterValue(this.missCount)
                     this.$emit("next-quiz")
                 }
 
             }else{
                 console.log("miss")
+                this.missCount++;
             }
         }
     },
