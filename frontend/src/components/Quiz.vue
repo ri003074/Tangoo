@@ -4,8 +4,6 @@
         <div class="quiz">{{ contents_quiz[randomNum].phrase_ja }}</div>
         <div class="quiz">{{ contents_quiz[randomNum].phrase_quiz }}</div>
         <div class="quiz quiz_answer">{{ contents_quiz[randomNum].word_blank }}</div>
-
-
     </div>
 </div>
 </template>
@@ -44,11 +42,11 @@ export default {
     methods:{
         updateCounterValue(miss){
             const content = this.contents[this.randomNum]
-            if(miss>1){
-                this.$emit("update-counter-value", content.s_counter+1, content.c_counter, content.id)//s_counter, c_counter, id
-            }else{
-                this.$emit("update-counter-value", content.s_counter+1, content.c_counter+1, content.id)//s_counter, c_counter, id
+            var cCounter = content.c_counter
+            if(miss<1){
+                cCounter = cCounter+1
             }
+            this.$emit("update-counter-value", content.s_counter+1, cCounter, content.id)//s_counter, c_counter, id
         },
         keydown(event){
             console.log("keydown!")
