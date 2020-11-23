@@ -1,7 +1,13 @@
 <template>
   <div>
     <DisplayHeader></DisplayHeader> 
-    <router-view :contents = 'contents' :randomNum = 'randomNum' v-on:update-database="setUpdatedCounterValue"></router-view>  
+    <router-view :loc = 'loc' 
+                 :contents = 'contents' 
+                 :contents_quiz = 'contents_quiz' 
+                 :randomNum = 'randomNum' 
+                 v-on:update-database="setUpdatedCounterValue" 
+                 v-on:update-quiz-blank="updateQuizBlank">
+                 </router-view>  
   </div>
 </template>
 
@@ -14,7 +20,9 @@ export default {
 
   data: function(){
     return {
+      loc:0,
       contents: null,
+      contents_quiz: [],
       arrNum:0,
       randomNum:0,
     }
@@ -30,28 +38,40 @@ export default {
       .get('http://localhost:8000/api/')
       .then(function(response){
         this.contents = response.data
-        console.log(this.contents)
 
-        //Quiz用のデータを追加する。
+        //Quiz用のデータを作成する。
         for(var i=0;i<this.contents.length;i++){
           const content = this.contents[i]
-          this.contents[i].phrase_quiz = content.phrase_en.replace(content.word_en, '_'.repeat(content.word_en.length))
-          this.contents[i].word_blank  = content.word_en.replace(/./g, '_')
+
+          const data = {
+            phrase_quiz : content.phrase_en.replace(content.word_en, '_'.repeat(content.word_en.length)),
+            word_blank  : content.word_en.replace(/./g, '_'),
+            phrase_ja   : content.phrase_ja,
+            word_en     : content.word_en,
+          }
+
+          this.contents_quiz.push(data)
         }
         this.randomNum = Math.floor(Math.random() * this.contents.length)
-      }
-      .bind(this))
+      }.bind(this))
       .catch(function(error){
         console.log(error)
       })
   },
   methods:{
+    updateQuizBlank(){
+      const content = this.contents_quiz[this.randomNum]
+      this.loc++;
+      this.contents_quiz[this.randomNum].word_blank = content.word_en.substring(0, this.loc) + '_'.repeat(content.word_en.length - this.loc);
+    },
+
     setUpdatedCounterValue(...args){ //update s,c counter value from child component
         const [sCounter, cCounter, id] = args
         this.arrNum = this.contents.findIndex( x => x.id===id) //get array number from id
         this.contents[this.arrNum].s_counter = sCounter
         this.contents[this.arrNum].c_counter = cCounter
     },
+
     updataDatabase(){
         var data = this.contents[this.arrNum] // data for updte
         axios
@@ -90,6 +110,4 @@ a {
 .btn{
   color:$main_moji_color;
 }
-
-  
 </style>

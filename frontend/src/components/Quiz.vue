@@ -1,15 +1,15 @@
 <template>
 <div v-if="contents">
     <div style="text-align:center;">
-        <div class="quiz">{{ contents[randomNum].phrase_ja }}</div>
-        <div class="quiz">{{ contents[randomNum].phrase_quiz }}</div>
-        <div class="quiz quiz_answer">{{ contents[randomNum].word_blank }}</div>
+        <div class="quiz">{{ contents_quiz[randomNum].phrase_ja }}</div>
+        <div class="quiz">{{ contents_quiz[randomNum].phrase_quiz }}</div>
+        <div class="quiz quiz_answer">{{ contents_quiz[randomNum].word_blank }}</div>
 
         <!-- <div>{{ contents[0].phrase_en }}</div>
         <div>{{ contents[0].word_en }}</div>
         <div>{{ contents[0].c_counter }}</div>
-        <div>{{ contents[0].s_counter }}</div> -->
-        <!-- <button @click="updateDatabase">btn</button> -->
+        <div>{{ contents[0].s_counter }}</div>
+        <button @click="updateDatabase">btn</button> -->
 
     </div>
 </div>
@@ -19,14 +19,19 @@
 export default {
     data: function(){
         return {
-            // arrNum:0,
         }
     },
     props:{
+        contents_quiz:{
+            type:Array,
+        },
         contents:{
             type:Array,
         },
         randomNum:{
+            type:Number,
+        },
+        loc:{
             type:Number,
         }
     },
@@ -34,19 +39,40 @@ export default {
         console.log("quiz created")
         // this.arrNum = Math.floor(Math.random()*2)
     },
+        mounted: function () {
+        //キーが入力されたときにkeydown関数を実行する。
+        window.addEventListener('keydown', this.keydown);
+    },
     computed:{
     },
     methods:{
         updateDatabase(){
-            this.$emit("update-database", 7, 7, 5)//s_counter, c_counter, id
+            this.$emit("update-database", 8, 2, 22)//s_counter, c_counter, id
+        },
+        keydown(event){
+            console.log("keydown!")
+            console.log(event.key)
+            console.log(this.loc)
+            const content = this.contents_quiz[this.randomNum]
+            if(content.word_en[this.loc] == event.key){
+                this.$emit("update-quiz-blank")
+            }else{
+                console.log("miss")
+            }
         }
     },
     watch:{
+        randomNum:{
+            handler:function(){
+                console.log("watch randomNum!!")
+            }
+        },
         contents:{
             handler:function(){
                 console.log("watch contents at Quiz.vue")
                 console.log(this.contents.length)
-            }
+            },
+            deep:true
         }
     }
 }
