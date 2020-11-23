@@ -1,7 +1,7 @@
 <template>
 <div v-if="contents">
     <div style="text-align:center;">
-        <div class="quiz">{{ contents_quiz[randomNum].phrase_ja }}</div>
+        <div class="quiz">{{ contents_quiz[randomNum].phrase_ja }} ({{ ((contents[randomNum].c_counter / contents[randomNum].s_counter)*100).toFixed(1) }}%)</div>
         <div class="quiz">{{ contents_quiz[randomNum].phrase_quiz }}</div>
         <div class="quiz quiz_answer">{{ contents_quiz[randomNum].word_blank }}</div>
     </div>
