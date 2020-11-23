@@ -1,7 +1,7 @@
 <template>
   <div>
     <DisplayHeader></DisplayHeader> 
-    <router-view :contents = 'contents' v-on:update-database="setUpdatedCounterValue"></router-view>  
+    <router-view :contents = 'contents' :randomNum = 'randomNum' v-on:update-database="setUpdatedCounterValue"></router-view>  
   </div>
 </template>
 
@@ -16,6 +16,7 @@ export default {
     return {
       contents: null,
       arrNum:0,
+      randomNum:0,
     }
   },
   components: { 
@@ -37,6 +38,7 @@ export default {
           this.contents[i].phrase_quiz = content.phrase_en.replace(content.word_en, '_'.repeat(content.word_en.length))
           this.contents[i].word_blank  = content.word_en.replace(/./g, '_')
         }
+        this.randomNum = Math.floor(Math.random() * this.contents.length)
       }
       .bind(this))
       .catch(function(error){

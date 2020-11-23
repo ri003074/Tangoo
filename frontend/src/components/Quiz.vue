@@ -1,9 +1,9 @@
 <template>
 <div v-if="contents">
     <div style="text-align:center;">
-        <div class="quiz">{{ contents[arrNum].phrase_ja }}</div>
-        <div class="quiz">{{ contents[arrNum].phrase_quiz }}</div>
-        <div class="quiz quiz_answer">{{ contents[arrNum].word_blank }}</div>
+        <div class="quiz">{{ contents[randomNum].phrase_ja }}</div>
+        <div class="quiz">{{ contents[randomNum].phrase_quiz }}</div>
+        <div class="quiz quiz_answer">{{ contents[randomNum].word_blank }}</div>
 
         <!-- <div>{{ contents[0].phrase_en }}</div>
         <div>{{ contents[0].word_en }}</div>
@@ -19,12 +19,15 @@
 export default {
     data: function(){
         return {
-            arrNum:0,
+            // arrNum:0,
         }
     },
     props:{
         contents:{
             type:Array,
+        },
+        randomNum:{
+            type:Number,
         }
     },
     created: function(){
