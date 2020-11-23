@@ -30,6 +30,13 @@ export default {
       .then(function(response){
         this.contents = response.data
         console.log(this.contents)
+
+        //Quiz用のデータを追加する。
+        for(var i=0;i<this.contents.length;i++){
+          const content = this.contents[i]
+          this.contents[i].phrase_quiz = content.phrase_en.replace(content.word_en, '_'.repeat(content.word_en.length))
+          this.contents[i].word_blank  = content.word_en.replace(/./g, '_')
+        }
       }
       .bind(this))
       .catch(function(error){
