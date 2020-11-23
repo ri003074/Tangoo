@@ -1,7 +1,7 @@
 <template>
   <div>
     <DisplayHeader></DisplayHeader> 
-    <router-view :contents = 'contents'></router-view>  
+    <router-view :contents = 'contents' v-on:update-database="setUpdatedCounterValue"></router-view>  
   </div>
 </template>
 
@@ -15,6 +15,7 @@ export default {
   data: function(){
     return {
       contents: null,
+      arrNum:0,
     }
   },
   components: { 
@@ -36,6 +37,29 @@ export default {
       })
   },
   methods:{
+    setUpdatedCounterValue(...args){ //update s,c counter value from child component
+        const [sCounter, cCounter, id] = args
+        this.arrNum = this.contents.findIndex( x => x.id===id) //get array number from id
+        this.contents[this.arrNum].s_counter = sCounter
+        this.contents[this.arrNum].c_counter = cCounter
+    },
+    updataDatabase(){
+        var data = this.contents[this.arrNum] // data for updte
+        axios
+          .put("http://localhost:8000/api/" + data.id + "/", data)
+          .then(function(response){
+            console.log(response.data)
+        })
+    }
+  },
+  watch:{
+    contents:{
+      handler: function(){
+        console.log("watch contents!")
+        this.updataDatabase();
+      },
+    deep:true
+    },
   }
 }  
 </script>
