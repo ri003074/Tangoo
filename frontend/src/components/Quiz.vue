@@ -23,10 +23,8 @@ export default {
         }
     },
     methods:{
-
         updateDatabase(){
-                       //s_counter, c_counter, id
-            this.$emit("update-database", 7, 7, 4)
+            this.$emit("update-database", 7, 7, 4)//s_counter, c_counter, id
         }
     },
     created: function(){
