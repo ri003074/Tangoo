@@ -47,7 +47,9 @@ export default {
     },
     methods:{
         updateDatabase(){
-            this.$emit("update-database", 8, 2, 22)//s_counter, c_counter, id
+            const content = this.contents[this.randomNum]
+
+            this.$emit("update-database", content.s_counter+1, 2, content.id)//s_counter, c_counter, id
         },
         keydown(event){
             console.log("keydown!")
@@ -56,6 +58,12 @@ export default {
             const content = this.contents_quiz[this.randomNum]
             if(content.word_en[this.loc] == event.key){
                 this.$emit("update-quiz-blank")
+
+                if( this.loc == content.word_en.length-1 ){
+                    this.updateDatabase()
+                    this.$emit("next-quiz")
+                }
+
             }else{
                 console.log("miss")
             }

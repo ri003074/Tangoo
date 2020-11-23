@@ -6,7 +6,8 @@
                  :contents_quiz = 'contents_quiz' 
                  :randomNum = 'randomNum' 
                  v-on:update-database="setUpdatedCounterValue" 
-                 v-on:update-quiz-blank="updateQuizBlank">
+                 v-on:update-quiz-blank="updateQuizBlank"
+                 v-on:next-quiz="nextQuiz">
                  </router-view>  
   </div>
 </template>
@@ -52,19 +53,27 @@ export default {
 
           this.contents_quiz.push(data)
         }
-        this.randomNum = Math.floor(Math.random() * this.contents.length)
+        this.setRandomNum()
       }.bind(this))
       .catch(function(error){
         console.log(error)
       })
   },
   methods:{
+    setRandomNum(){
+        this.randomNum = Math.floor(Math.random() * this.contents.length)
+    },
     updateQuizBlank(){
       const content = this.contents_quiz[this.randomNum]
       this.loc++;
       this.contents_quiz[this.randomNum].word_blank = content.word_en.substring(0, this.loc) + '_'.repeat(content.word_en.length - this.loc);
     },
-
+    nextQuiz(){
+      console.log("finish! go to next")
+      this.contents_quiz[this.randomNum].word_blank = this.contents_quiz[this.randomNum].word_en.replace(/./g, '_'),
+      this.setRandomNum()
+      this.loc = 0;
+    },
     setUpdatedCounterValue(...args){ //update s,c counter value from child component
         const [sCounter, cCounter, id] = args
         this.arrNum = this.contents.findIndex( x => x.id===id) //get array number from id
