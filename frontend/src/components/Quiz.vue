@@ -34,9 +34,13 @@ export default {
         console.log("quiz created")
         // this.arrNum = Math.floor(Math.random()*2)
     },
-        mounted: function () {
+    mounted: function () {
         //キーが入力されたときにkeydown関数を実行する。
         window.addEventListener('keydown', this.keydown);
+    },
+    beforeDestroy:function(){
+        console.log("before destroy")
+        window.removeEventListener('keydown', this.keydown);
     },
     computed:{
     },
