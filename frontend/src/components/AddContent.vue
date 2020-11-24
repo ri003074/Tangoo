@@ -46,3 +46,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.form-control {
+  border:none;;
+  &:focus{
+    border-color:$main_background_color;
+    box-shadow: none;;
+  }
+}
+</style>
