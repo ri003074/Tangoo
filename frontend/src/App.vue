@@ -120,5 +120,8 @@ a {
 //TODO 何故必要かわからない
 .btn{
   color:$main_moji_color;
+    &:hover {
+    color:$sub_moji_color;
+  }
 }
 </style>

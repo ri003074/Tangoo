@@ -17,13 +17,45 @@
           <router-link to='/quiz' class="nav-link">Quiz</router-link>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <!-- <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2 search-form" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form> -->
     </div>
   </nav>
 </template>
 
 <style lang="scss" scoped>
+.search-form{
+  outline: none;;
+  background-color:$main_background_color;
+  color:$main_moji_color;
+  outline:none !important;
+  border-color:$main_background_color;
+  &:focus{
+    background-color: $main_background_color;
+    color:$main_moji_color;
+    outline:none !important;
+    box-shadow: none;
+    border-color: $main_background_color;
+  }
+}
+.btn-outline-secondary{
+  color:white;
+  border:none;
+  &:hover{
+    background-color: $main_background_color;
+  }
+  &:focus{
+    border:none;
+    box-shadow: none !important;
+  }
+}
+btn-outline-secondary:not(:disabled):not(.disabled).active, 
+.btn-outline-secondary:not(:disabled):not(.disabled):active, 
+.show>.btn-outline-secondary.dropdown-toggle {
+  color: #fff;
+  background-color:$main_background_color;
+  border-color:$main_background_color ;
+}
 </style>
