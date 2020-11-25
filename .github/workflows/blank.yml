@@ -29,6 +29,7 @@ jobs:
         pip install libsass
         pip install django-sass-processor
         pip install django-multiselectfield
+        pipenv install djangorestframework==3.8.2
     
     - name: run test
       run: |
