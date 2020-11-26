@@ -12,8 +12,8 @@
 export default {
     data: function(){
         return {
-            missCount:0,
-            pageStatus:'playing',
+            miss_count:0,
+            page_status:'playing',
         }
     },
     props:{
@@ -58,28 +58,28 @@ export default {
             console.log(event.keyCode)
             console.log(this.letter_location)
             const content = this.contents_quiz[this.random_number]
-            if(this.pageStatus=='playing'){
+            if(this.page_status=='playing'){
 
                 if(content.word_en[this.letter_location] == event.key){
                     this.$emit("update-quiz-blank")
 
                     if(this.letter_location == content.word_en.length-1){
-                        this.updateCounterValue(this.missCount)
-                        this.missCount=0
-                        this.pageStatus='stop'
+                        this.updateCounterValue(this.miss_count)
+                        this.miss_count=0
+                        this.page_status='stop'
                         console.log("set page status to stop")
                         // this.$emit("next-quiz")
                     }
 
                 }else{
                     console.log("miss")
-                    this.missCount++;
+                    this.miss_count++;
                 }
             }else{
                 console.log("else")
                 if(event.keyCode==32){
                     this.$emit("next-quiz")
-                        this.pageStatus='playing'
+                        this.page_status='playing'
 
                 }
             }
