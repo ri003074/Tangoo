@@ -17,27 +17,19 @@ export default {
         }
     },
     props:{
-        contentsQuiz:{
-            type:Array,
-        },
-        contents:{
-            type:Array,
-        },
-        randomNumber:{
-            type:Number,
-        },
-        letterLocation:{
-            type:Number,
-        }
+        contentsQuiz:  { type:Array  },
+        contents:      { type:Array  },
+        randomNumber:  { type:Number },
+        letterLocation:{ type:Number },
     },
-    created: function(){
+    created(){
         console.log("quiz created")
     },
-    mounted: function () {
+    mounted() {
         //キーが入力されたときにkeydown関数を実行する。
         window.addEventListener('keydown', this.keydown);
     },
-    beforeDestroy:function(){
+    beforeDestroy(){
         console.log("before destroy")
         window.removeEventListener('keydown', this.keydown);
     },
@@ -46,7 +38,7 @@ export default {
     methods:{
         updateCounterValue(miss){
             const content = this.contents[this.randomNumber]
-            var cCounter = content.c_counter
+            var cCounter  = content.c_counter
             if(miss<1){
                 cCounter = cCounter+1
             }
@@ -68,7 +60,6 @@ export default {
                         this.missCount=0
                         this.pageStatus='stop'
                         console.log("set page status to stop")
-                        // this.$emit("next-quiz")
                     }
 
                 }else{
@@ -77,9 +68,9 @@ export default {
                 }
             }else{
                 console.log("else")
-                if(event.keyCode==32){
+                if(event.keyCode == 32){
                     this.$emit("next-quiz")
-                        this.pageStatus='playing'
+                    this.pageStatus='playing'
 
                 }
             }
@@ -87,12 +78,12 @@ export default {
     },
     watch:{
         randomNumber:{
-            handler:function(){
+            handler(){
                 console.log("watch randomNumber!!")
             }
         },
         contents:{
-            handler:function(){
+            handler(){
                 console.log("watch contents at Quiz.vue")
                 console.log(this.contents.length)
             },
