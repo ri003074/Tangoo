@@ -1,9 +1,9 @@
 <template>
 <div v-if="contents">
     <div style="text-align:center;">
-        <div class="quiz">{{ contents_quiz[randomNum].phrase_ja }} ({{ ((contents[randomNum].c_counter / contents[randomNum].s_counter)*100).toFixed(1) }}%)</div>
-        <div class="quiz">{{ contents_quiz[randomNum].phrase_quiz }}</div>
-        <div class="quiz quiz_answer">{{ contents_quiz[randomNum].word_blank }}</div>
+        <div class="quiz">{{ contents_quiz[random_number].phrase_ja }} ({{ ((contents[random_number].c_counter / contents[random_number].s_counter)*100).toFixed(1) }}%)</div>
+        <div class="quiz">{{ contents_quiz[random_number].phrase_quiz }}</div>
+        <div class="quiz quiz_answer">{{ contents_quiz[random_number].word_blank }}</div>
     </div>
 </div>
 </template>
@@ -23,16 +23,15 @@ export default {
         contents:{
             type:Array,
         },
-        randomNum:{
+        random_number:{
             type:Number,
         },
-        loc:{
+        letter_location:{
             type:Number,
         }
     },
     created: function(){
         console.log("quiz created")
-        // this.arrNum = Math.floor(Math.random()*2)
     },
     mounted: function () {
         //キーが入力されたときにkeydown関数を実行する。
@@ -46,7 +45,7 @@ export default {
     },
     methods:{
         updateCounterValue(miss){
-            const content = this.contents[this.randomNum]
+            const content = this.contents[this.random_number]
             var cCounter = content.c_counter
             if(miss<1){
                 cCounter = cCounter+1
@@ -57,14 +56,14 @@ export default {
             console.log("keydown!")
             console.log(event.key)
             console.log(event.keyCode)
-            console.log(this.loc)
-            const content = this.contents_quiz[this.randomNum]
+            console.log(this.letter_location)
+            const content = this.contents_quiz[this.random_number]
             if(this.pageStatus=='playing'){
 
-                if(content.word_en[this.loc] == event.key){
+                if(content.word_en[this.letter_location] == event.key){
                     this.$emit("update-quiz-blank")
 
-                    if(this.loc == content.word_en.length-1){
+                    if(this.letter_location == content.word_en.length-1){
                         this.updateCounterValue(this.missCount)
                         this.missCount=0
                         this.pageStatus='stop'
@@ -87,9 +86,9 @@ export default {
         }
     },
     watch:{
-        randomNum:{
+        random_number:{
             handler:function(){
-                console.log("watch randomNum!!")
+                console.log("watch random_number!!")
             }
         },
         contents:{

@@ -1,10 +1,10 @@
 <template>
   <div>
     <DisplayHeader></DisplayHeader> 
-    <router-view :loc = 'loc' 
+    <router-view :letter_location = 'letter_location' 
                  :contents = 'contents' 
                  :contents_quiz = 'contents_quiz' 
-                 :randomNum = 'randomNum' 
+                 :random_number = 'random_number' 
                  v-on:update-counter-value="updatedCounterValue" 
                  v-on:update-quiz-blank="updateQuizBlank"
                  v-on:next-quiz="nextQuiz">
@@ -21,11 +21,11 @@ export default {
 
   data: function(){
     return {
-      loc:1,
+      letter_location:1,
       contents: null,
       contents_quiz: [],
-      arrNum:0,
-      randomNum:0,
+      array_num_for_update:0,
+      random_number:0,
     }
   },
   components: { 
@@ -63,15 +63,15 @@ export default {
   },
   methods:{
     setRandomNum(){
-      this.randomNum = Math.floor(Math.random() * this.contents.length)
+      this.random_number = Math.floor(Math.random() * this.contents.length)
     },
     updateQuizBlank(){
-      const content = this.contents_quiz[this.randomNum]
-      this.loc++;
-      this.contents_quiz[this.randomNum].word_blank = content.word_en.substring(0, this.loc) + '_'.repeat(content.word_en.length - this.loc);
+      const content = this.contents_quiz[this.random_number]
+      this.letter_location++;
+      this.contents_quiz[this.random_number].word_blank = content.word_en.substring(0, this.letter_location) + '_'.repeat(content.word_en.length - this.letter_location);
     },
     updataDatabase(){
-      var data = this.contents[this.arrNum] // data for updte
+      var data = this.contents[this.array_num_for_update] // data for updte
       axios
         .put("http://localhost:8000/api/" + data.id + "/", data)
         .then(function(response){
@@ -80,15 +80,15 @@ export default {
     },
     nextQuiz(){
       console.log("finish! go to next")
-      this.contents_quiz[this.randomNum].word_blank = this.contents_quiz[this.randomNum].word_blank_begin + '_'.repeat(this.contents_quiz[this.randomNum].word_en.length-1)
+      this.contents_quiz[this.random_number].word_blank = this.contents_quiz[this.random_number].word_blank_begin + '_'.repeat(this.contents_quiz[this.random_number].word_en.length-1)
       this.setRandomNum()
-      this.loc = 1;
+      this.letter_location = 1;
     },
     updatedCounterValue(...args){ //update s,c counter value from child component
       const [sCounter, cCounter, id] = args
-      this.arrNum = this.contents.findIndex( x => x.id===id) //get array number from id
-      this.contents[this.arrNum].s_counter = sCounter
-      this.contents[this.arrNum].c_counter = cCounter
+      this.array_num_for_update = this.contents.findIndex( x => x.id===id) //get array number from id
+      this.contents[this.array_num_for_update].s_counter = sCounter
+      this.contents[this.array_num_for_update].c_counter = cCounter
     },
   },
   watch:{
