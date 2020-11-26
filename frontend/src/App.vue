@@ -43,13 +43,12 @@ export default {
         //Quiz用のデータを作成する。
         for(var i=0;i<this.contents.length;i++){
           const content = this.contents[i]
-          const start  = content.word_en.slice(0,1);
+          const word_en_begin  = content.word_en.slice(0,1);
 
           const data = {
-            word_blank_start:start,
+            word_blank_begin:word_en_begin,
             phrase_quiz : content.phrase_en.replace(content.word_en, '_'.repeat(content.word_en.length)),
-            // word_blank  : content.word_en.replace(/./g, '_'),
-            word_blank : start + '_'.repeat(content.word_en.length-1),
+            word_blank : word_en_begin + '_'.repeat(content.word_en.length-1),
             phrase_ja   : content.phrase_ja,
             word_en     : content.word_en,
           }
@@ -81,7 +80,7 @@ export default {
     },
     nextQuiz(){
       console.log("finish! go to next")
-      this.contents_quiz[this.randomNum].word_blank = this.contents_quiz[this.randomNum].word_blank_start + '_'.repeat(this.contents_quiz[this.randomNum].word_en.length-1)
+      this.contents_quiz[this.randomNum].word_blank = this.contents_quiz[this.randomNum].word_blank_begin + '_'.repeat(this.contents_quiz[this.randomNum].word_en.length-1)
       this.setRandomNum()
       this.loc = 1;
     },
