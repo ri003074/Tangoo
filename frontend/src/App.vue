@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <DisplayHeader></DisplayHeader> 
-    <router-view :letterLocation = 'letterLocation' 
-                 :contents       = 'contents' 
-                 :contentsQuiz   = 'contentsQuiz' 
-                 :randomNumber   = 'randomNumber' 
-                 v-on:update-counter-value = "updatedCounterValue" 
-                 v-on:update-quiz-blank    = "updateQuizBlank"
-                 v-on:next-quiz            = "nextQuiz">
-                 </router-view>  
-  </div>
+    <div>
+        <DisplayHeader></DisplayHeader> 
+        <router-view :letterLocation = 'letterLocation' 
+                     :contents       = 'contents' 
+                     :contentsQuiz   = 'contentsQuiz' 
+                     :randomNumber   = 'randomNumber' 
+                     v-on:update-counter-value = "updatedCounterValue" 
+                     v-on:update-quiz-blank    = "updateQuizBlank"
+                     v-on:next-quiz            = "nextQuiz">
+                     </router-view>  
+    </div>
 </template>
 
 <script>
