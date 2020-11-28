@@ -64,14 +64,15 @@ export default {
 
             if(content.word_en[this.letterLocation] == event.key || this.missCount > 5){
                 this.$emit("update-quiz-blank")
+
+                if(this.letterLocation == content.word_en.length-1){
+                    this.proceedToNextQuiz()
+                }
             } else {
                 console.log("miss")
                 this.missCount++;
             }
 
-            if(this.letterLocation == content.word_en.length-1){
-                this.proceedToNextQuiz()
-            }
         }
     },
     watch:{
