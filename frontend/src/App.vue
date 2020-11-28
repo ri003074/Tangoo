@@ -82,7 +82,7 @@ export default {
         },
         nextQuiz(){
             console.log("finish! go to next")
-            this.contents[this.randomNumber].word_blank = this.contents[this.randomNumber].word_blank_begin + '_'.repeat(this.contents[this.randomNumber].word_en.length-1)
+            this.contents[this.randomNumber].word_blank = this.contents[this.randomNumber].word_en_begin + '_'.repeat(this.contents[this.randomNumber].word_en.length-1)
             this.setRandomNum()
             this.letterLocation = 1;
         },

@@ -49,10 +49,12 @@ export default {
             })
         },
         async proceedToNextQuiz(){
+            window.removeEventListener('keydown', this.keydown);
             this.updateCounterValue(this.missCount)
             this.missCount=0
             await this.sleep(1000)
             this.$emit("next-quiz")
+            window.addEventListener('keydown', this.keydown);
         },
         keydown(event){
             console.log("keydown!")
