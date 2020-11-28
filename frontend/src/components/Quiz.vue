@@ -13,7 +13,6 @@ export default {
     data: function(){
         return {
             missCount:0,
-            pageStatus:'playing',
         }
     },
     props:{
@@ -44,34 +43,41 @@ export default {
             }
             this.$emit("update-counter-value", content.s_counter+1, cCounter, content.id)//s_counter, c_counter, id
         },
+        sleep(msec) {
+            return new Promise(function(resolve) {
+            setTimeout(function() {resolve()}, msec);
+ 
+            })
+        },
+        async proceedToNextQuiz(){
+            this.updateCounterValue(this.missCount)
+            this.missCount=0
+            await this.sleep(1000)
+            this.$emit("next-quiz")
+        },
         keydown(event){
             console.log("keydown!")
             console.log(event.key)
             console.log(event.keyCode)
             console.log(this.letterLocation)
             const content = this.contentsQuiz[this.randomNumber]
-            if(this.pageStatus=='playing'){
 
-                if(content.word_en[this.letterLocation] == event.key){
+            if(content.word_en[this.letterLocation] == event.key){
+                this.$emit("update-quiz-blank")
+
+                if(this.letterLocation == content.word_en.length-1){
+                    this.proceedToNextQuiz()
+                }
+            }else{
+                console.log("miss")
+                this.missCount++;
+
+                if(this.missCount > 5){ //missCountが5回を超えた場合、その後は不正解でもブランクを進める
                     this.$emit("update-quiz-blank")
 
                     if(this.letterLocation == content.word_en.length-1){
-                        this.updateCounterValue(this.missCount)
-                        this.missCount=0
-                        this.pageStatus='stop'
-                        console.log("set page status to stop")
+                        this.proceedToNextQuiz()
                     }
-
-                }else{
-                    console.log("miss")
-                    this.missCount++;
-                }
-            }else{
-                console.log("else")
-                if(event.keyCode == 32){
-                    this.$emit("next-quiz")
-                    this.pageStatus='playing'
-
                 }
             }
         }
