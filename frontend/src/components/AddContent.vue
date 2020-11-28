@@ -28,9 +28,6 @@ export default {
         phrase_en  : '',
         phrase_ja  : '',
         word_en    : '',
-        s_counter  : "1", //initial value
-        c_counter  : "1", //initial value
-        supplement : "",  //initial value
       }
     }
   },

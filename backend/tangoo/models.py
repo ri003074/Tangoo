@@ -8,7 +8,7 @@ class Tangoo(models.Model):
     word_en    = models.CharField(max_length=200)
     supplement = models.TextField(default=None, blank=True, null=True)
     s_counter  = models.IntegerField(default=1)
-    c_counter  = models.IntegerField(default=1)
+    c_counter  = models.IntegerField(default=0)
 
     def __str__(self):
         return self.word_en
