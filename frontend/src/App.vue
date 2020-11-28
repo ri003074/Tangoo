@@ -65,7 +65,7 @@ export default {
     },
     methods:{
         setRandomNum(){
-        this.randomNumber = Math.floor(Math.random() * this.contents.length)
+            this.randomNumber = Math.floor(Math.random() * this.contents.length)
         },
         updateQuizBlank(){
             const content = this.contentsQuiz[this.randomNumber]
