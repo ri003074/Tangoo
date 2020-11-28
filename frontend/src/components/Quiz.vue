@@ -61,23 +61,15 @@ export default {
             console.log(this.letterLocation)
             const content = this.contents[this.randomNumber]
 
-            if(content.word_en[this.letterLocation] == event.key){
+            if(content.word_en[this.letterLocation] == event.key || this.missCount > 5){
                 this.$emit("update-quiz-blank")
-
-                if(this.letterLocation == content.word_en.length-1){
-                    this.proceedToNextQuiz()
-                }
-            }else{
+            } else {
                 console.log("miss")
                 this.missCount++;
+            }
 
-                if(this.missCount > 5){ //missCountが5回を超えた場合、その後は不正解でもブランクを進める
-                    this.$emit("update-quiz-blank")
-
-                    if(this.letterLocation == content.word_en.length-1){
-                        this.proceedToNextQuiz()
-                    }
-                }
+            if(this.letterLocation == content.word_en.length-1){
+                this.proceedToNextQuiz()
             }
         }
     },
