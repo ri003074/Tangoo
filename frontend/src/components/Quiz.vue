@@ -1,5 +1,5 @@
 <template>
-<div v-if="contents">
+<div v-if="contents[randomNumber]">
     <div style="text-align:center;">
         <div class="quiz">{{ contents[randomNumber].phrase_ja }} ({{ ((contents[randomNumber].c_counter / contents[randomNumber].s_counter)*100).toFixed(1) }}%)</div>
         <div class="quiz">{{ contents[randomNumber].phrase_quiz }}</div>
@@ -44,8 +44,7 @@ export default {
         },
         sleep(msec) {
             return new Promise(function(resolve) {
-            setTimeout(function() {resolve()}, msec);
- 
+                setTimeout(function() {resolve()}, msec);
             })
         },
         async proceedToNextQuiz(){
