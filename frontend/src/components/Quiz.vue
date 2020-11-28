@@ -36,7 +36,7 @@ export default {
     methods:{
         updateCounterValue(miss){
             const content = this.contents[this.randomNumber]
-            var cCounter  = content.c_counter
+            let cCounter  = content.c_counter
             if(miss<1){
                 cCounter = cCounter+1
             }

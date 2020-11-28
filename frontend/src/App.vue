@@ -38,9 +38,9 @@ export default {
             .get('http://localhost:8000/api/')
             .then(function(response){
 
-            var tmpData =[]
+            let tmpData =[]
             //Quiz用のデータを作成する。
-            for(var i=0; i<response.data.length; i++){
+            for(let i=0; i<response.data.length; i++){
                 const content             = response.data[i]
                 const word_en_begin       = content.word_en.slice(0,1);
                 
@@ -73,7 +73,7 @@ export default {
             this.contents[this.randomNumber].word_blank = content.word_en.substring(0, this.letterLocation) + '_'.repeat(content.word_en.length - this.letterLocation);
         },
         updataDatabase(){
-            var data = this.contents[this.arrayNumberForUpdate] // data for updte
+            let data = this.contents[this.arrayNumberForUpdate] // data for updte
             axios
                 .put("http://localhost:8000/api/" + data.id + "/", data)
                 .then(function(response){
