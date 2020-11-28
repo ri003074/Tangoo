@@ -3,7 +3,6 @@
         <DisplayHeader></DisplayHeader> 
         <router-view :letterLocation = 'letterLocation' 
                      :contents       = 'contents' 
-                     :contentsQuiz   = 'contentsQuiz' 
                      :randomNumber   = 'randomNumber' 
                      v-on:update-counter-value = "updatedCounterValue" 
                      v-on:update-quiz-blank    = "updateQuizBlank"
@@ -22,10 +21,10 @@ export default {
     data: function(){
         return {
             letterLocation       : 1,
-            contents             : null,
-            contentsQuiz         : [],
+            contents             : [],
             arrayNumberForUpdate : 0,
             randomNumber         : 0,
+            contentNew           : [],
         }
     },
     components: { 
@@ -38,25 +37,26 @@ export default {
         axios
             .get('http://localhost:8000/api/')
             .then(function(response){
-            this.contents = response.data
 
+            var tmpData =[]
             //Quiz用のデータを作成する。
-            for(var i=0; i<this.contents.length; i++){
-                const content       = this.contents[i]
-                const word_en_begin = content.word_en.slice(0,1);
-                const correct_answer_rate = ((content.c_counter / content.s_counter)*100).toFixed(1)
+            for(var i=0; i<response.data.length; i++){
+                const content             = response.data[i]
+                const word_en_begin       = content.word_en.slice(0,1);
+                
+                content.word_en_begin       = word_en_begin
+                content.word_blank          = word_en_begin + '_'.repeat(content.word_en.length-1), //
+                content.phrase_quiz         = content.phrase_en.replace(content.word_en, '_'.repeat(content.word_en.length)), //英語のフレーズのなかで問題となる部分をを'_'で置き換える
+                content.correct_answer_rate =((content.c_counter / content.s_counter)*100).toFixed(1) 
 
-                const data = {
-                    word_blank_begin    : word_en_begin,
-                    phrase_quiz         : content.phrase_en.replace(content.word_en, '_'.repeat(content.word_en.length)), //英語のフレーズのなかで問題となる部分をを'_'で置き換える
-                    word_blank          : word_en_begin + '_'.repeat(content.word_en.length-1), //
-                    phrase_ja           : content.phrase_ja,
-                    word_en             : content.word_en,
-                    correct_answer_rate : correct_answer_rate
-                }
-  
-            this.contentsQuiz.push(data)
+                
+                tmpData.push(content)
             }
+            tmpData.sort(function(a,b){
+                return a.correct_answer_rate - b.correct_answer_rate
+            })
+            this.contents = tmpData
+
             this.setRandomNum()
             }.bind(this))
             .catch(function(error){
@@ -68,9 +68,9 @@ export default {
             this.randomNumber = Math.floor(Math.random() * this.contents.length)
         },
         updateQuizBlank(){
-            const content = this.contentsQuiz[this.randomNumber]
+            const content = this.contents[this.randomNumber]
             this.letterLocation++;
-            this.contentsQuiz[this.randomNumber].word_blank = content.word_en.substring(0, this.letterLocation) + '_'.repeat(content.word_en.length - this.letterLocation);
+            this.contents[this.randomNumber].word_blank = content.word_en.substring(0, this.letterLocation) + '_'.repeat(content.word_en.length - this.letterLocation);
         },
         updataDatabase(){
             var data = this.contents[this.arrayNumberForUpdate] // data for updte
@@ -82,7 +82,7 @@ export default {
         },
         nextQuiz(){
             console.log("finish! go to next")
-            this.contentsQuiz[this.randomNumber].word_blank = this.contentsQuiz[this.randomNumber].word_blank_begin + '_'.repeat(this.contentsQuiz[this.randomNumber].word_en.length-1)
+            this.contents[this.randomNumber].word_blank = this.contents[this.randomNumber].word_blank_begin + '_'.repeat(this.contents[this.randomNumber].word_en.length-1)
             this.setRandomNum()
             this.letterLocation = 1;
         },

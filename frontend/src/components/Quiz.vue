@@ -1,9 +1,9 @@
 <template>
 <div v-if="contents">
     <div style="text-align:center;">
-        <div class="quiz">{{ contentsQuiz[randomNumber].phrase_ja }} ({{ ((contents[randomNumber].c_counter / contents[randomNumber].s_counter)*100).toFixed(1) }}%)</div>
-        <div class="quiz">{{ contentsQuiz[randomNumber].phrase_quiz }}</div>
-        <div class="quiz quiz_answer">{{ contentsQuiz[randomNumber].word_blank }}</div>
+        <div class="quiz">{{ contents[randomNumber].phrase_ja }} ({{ ((contents[randomNumber].c_counter / contents[randomNumber].s_counter)*100).toFixed(1) }}%)</div>
+        <div class="quiz">{{ contents[randomNumber].phrase_quiz }}</div>
+        <div class="quiz quiz_answer">{{ contents[randomNumber].word_blank }}</div>
     </div>
 </div>
 </template>
@@ -16,8 +16,7 @@ export default {
         }
     },
     props:{
-        contentsQuiz:  { type:Array  },
-        contents:      { type:Array  },
+        contents:  { type:Array  },
         randomNumber:  { type:Number },
         letterLocation:{ type:Number },
     },
@@ -60,7 +59,7 @@ export default {
             console.log(event.key)
             console.log(event.keyCode)
             console.log(this.letterLocation)
-            const content = this.contentsQuiz[this.randomNumber]
+            const content = this.contents[this.randomNumber]
 
             if(content.word_en[this.letterLocation] == event.key){
                 this.$emit("update-quiz-blank")
