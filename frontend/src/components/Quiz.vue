@@ -1,11 +1,11 @@
 <template>
-<div v-if="contents[randomNumber]">
-    <div style="text-align:center;">
-        <div class="quiz">{{ contents[randomNumber].phrase_ja }} ({{ ((contents[randomNumber].c_counter / contents[randomNumber].s_counter)*100).toFixed(1) }}%)</div>
-        <div class="quiz">{{ contents[randomNumber].phrase_quiz }}</div>
-        <div class="quiz quiz_answer">{{ contents[randomNumber].word_blank }}</div>
+    <div v-if="contents[randomNumber]">
+        <div style="text-align:center;">
+            <div class="quiz">{{ contents[randomNumber].phrase_ja }} ({{ ((contents[randomNumber].c_counter / contents[randomNumber].s_counter)*100).toFixed(1) }}%)</div>
+            <div class="quiz">{{ contents[randomNumber].phrase_quiz }}</div>
+            <div class="quiz quiz_answer">{{ contents[randomNumber].word_blank }}</div>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
