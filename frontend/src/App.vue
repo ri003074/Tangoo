@@ -48,16 +48,14 @@ export default {
                 content.word_blank          = word_en_begin + '_'.repeat(content.word_en.length-1), //
                 content.phrase_quiz         = content.phrase_en.replace(content.word_en, '_'.repeat(content.word_en.length)), //英語のフレーズのなかで問題となる部分をを'_'で置き換える
                 content.correct_answer_rate =((content.c_counter / content.s_counter)*100).toFixed(1) 
-
-                
                 tmpData.push(content)
             }
-            tmpData.sort(function(a,b){
+            tmpData.sort(function(a,b){ //正答率が低い順番に並び替える
                 return a.correct_answer_rate - b.correct_answer_rate
             })
             this.contents = tmpData
 
-            this.setRandomNum()
+            // this.setRandomNum()
             }.bind(this))
             .catch(function(error){
                 console.log(error)
@@ -65,7 +63,8 @@ export default {
     },
     methods:{
         setRandomNum(){
-            this.randomNumber = Math.floor(Math.random() * this.contents.length)
+            // this.randomNumber = Math.floor(Math.random() * this.contents.length)
+            this.randomNumber += 1;
         },
         updateQuizBlank(){
             const content = this.contents[this.randomNumber]
