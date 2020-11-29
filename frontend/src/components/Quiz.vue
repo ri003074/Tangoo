@@ -5,6 +5,14 @@
             <div class="quiz">{{ contents[randomNumber].phrase_ja }} ({{ ((contents[randomNumber].c_counter / contents[randomNumber].s_counter)*100).toFixed(1) }}%)</div>
             <div class="quiz">{{ contents[randomNumber].phrase_quiz }}</div>
             <div class="quiz quiz_answer">{{ contents[randomNumber].word_blank }}</div>
+
+            <div v-if="isCorrect" class="mt-4">
+                <font-awesome-icon icon="thumbs-up" />
+            </div>
+            <div v-else class="mt-4">
+                <font-awesome-icon icon="thumbs-down" />
+            </div>
+
         </div>
     </div>
 </template>
@@ -14,12 +22,13 @@ export default {
     data: function(){
         return {
             missCount:0,
+            isCorrect:true,
         }
     },
     props:{
-        contents:  { type:Array  },
-        randomNumber:  { type:Number },
-        letterLocation:{ type:Number },
+        contents       : { type:Array  },
+        randomNumber   : { type:Number },
+        letterLocation : { type:Number },
     },
     created(){
         console.log("quiz created")
@@ -64,12 +73,14 @@ export default {
             const content = this.contents[this.randomNumber]
 
             if(content.word_en[this.letterLocation] == event.key || this.missCount > 5){
+                this.isCorrect=true
                 this.$emit("update-quiz-blank")
 
                 if(this.letterLocation == content.word_en.length-1){
                     this.proceedToNextQuiz()
                 }
             } else {
+                this.isCorrect=false
                 console.log("miss")
                 this.missCount++;
             }

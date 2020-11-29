@@ -16,15 +16,15 @@ import 'normalize.css'
 import axios from 'axios'
 import DisplayHeader from './components/DisplayHeader.vue'
 
+
 export default {
 
     data: function(){
         return {
-            letterLocation       : 1,
             contents             : [],
+            letterLocation       : 1,
             arrayNumberForUpdate : 0,
             randomNumber         : 0,
-            contentNew           : [],
         }
     },
     components: { 
