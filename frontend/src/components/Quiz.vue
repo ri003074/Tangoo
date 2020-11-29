@@ -21,8 +21,10 @@
 export default {
     data: function(){
         return {
-            missCount:0,
-            isCorrect:true,
+            missCount  : 0,
+            isCorrect  : true,
+            music      : undefined,
+            musicSound : "se_maoudamashii_battle_gun01.mp3",
         }
     },
     props:{
@@ -36,6 +38,8 @@ export default {
     mounted() {
         //キーが入力されたときにkeydown関数を実行する。
         window.addEventListener('keydown', this.keydown);
+        this.music = new Audio(this.musicSound);
+        this.music.volume = 0.1;
     },
     beforeDestroy(){
         console.log("before destroy")
@@ -73,6 +77,8 @@ export default {
             const content = this.contents[this.randomNumber]
 
             if(content.word_en[this.letterLocation] == event.key || this.missCount > 5){
+                this.music.currentTime=0;
+                this.music.play();
                 this.isCorrect=true
                 this.$emit("update-quiz-blank")
 
