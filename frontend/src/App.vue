@@ -47,7 +47,7 @@ export default {
                 content.word_en_begin       = word_en_begin
                 content.word_blank          = word_en_begin + '_'.repeat(content.word_en.length-1), //
                 content.phrase_quiz         = content.phrase_en.replace(content.word_en, '_'.repeat(content.word_en.length)), //英語のフレーズのなかで問題となる部分をを'_'で置き換える
-                content.correct_answer_rate =((content.c_counter / content.s_counter)*100).toFixed(1) 
+                content.correct_answer_rate = (content.c_counter / content.s_counter)*100
                 tmpData.push(content)
             }
             tmpData.sort(function(a,b){ //正答率が低い順番に並び替える
@@ -62,7 +62,7 @@ export default {
             })
     },
     methods:{
-        setRandomNum(){
+        setRandomNum(){ //最初は乱数にしていたが、正答率が低い順に並べることにしたので、やめた。
             // this.randomNumber = Math.floor(Math.random() * this.contents.length)
             this.randomNumber += 1;
         },
