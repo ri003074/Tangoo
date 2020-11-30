@@ -72,8 +72,6 @@ export default {
         keydown(event){
             console.log("keydown!")
             console.log(event.key)
-            console.log(event.keyCode)
-            console.log(this.letterLocation)
             const content = this.contents[this.randomNumber]
 
             if(content.word_en[this.letterLocation] == event.key || this.missCount > 5){
@@ -86,11 +84,10 @@ export default {
                     this.proceedToNextQuiz()
                 }
             } else {
-                this.isCorrect=false
                 console.log("miss")
+                this.isCorrect=false
                 this.missCount++;
             }
-
         }
     },
     watch:{
@@ -102,7 +99,6 @@ export default {
         contents:{
             handler(){
                 console.log("watch contents at Quiz.vue")
-                console.log(this.contents.length)
             },
             deep:true
         }
@@ -115,7 +111,6 @@ export default {
         margin-top:8px;
         margin-bottom:8px;
     }
-
     .quiz_answer{
         letter-spacing: 0.1em;
         font-size:32px;
