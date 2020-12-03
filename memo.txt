@@ -5,3 +5,6 @@ npm run serve
 v-if="contents"でデータの存在を確かめればOK。
 
 
+英語読み上げ
+Docker上で動かす
+正答率が低い順か、ランダムか
