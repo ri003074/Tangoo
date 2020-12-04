@@ -48,6 +48,14 @@ export default {
     computed:{
     },
     methods:{
+        speak(){
+            var speak = new SpeechSynthesisUtterance();
+            speak.text = this.contents[this.randomNumber].phrase_en
+            speak.rate = 1.0
+            speak.pitch = 0
+            speak.lang = 'en-US'
+            speechSynthesis.speak(speak)
+        },
         updateCounterValue(miss){
             const content = this.contents[this.randomNumber]
             let cCounter  = content.c_counter
@@ -65,7 +73,8 @@ export default {
             window.removeEventListener('keydown', this.keydown);
             this.updateCounterValue(this.missCount)
             this.missCount=0
-            await this.sleep(1000)
+            this.speak()
+            await this.sleep(2000)
             this.$emit("next-quiz")
             window.addEventListener('keydown', this.keydown);
         },
