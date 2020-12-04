@@ -74,7 +74,7 @@ export default {
             this.updateCounterValue(this.missCount)
             this.missCount=0
             this.speak()
-            await this.sleep(2000)
+            await this.sleep(this.contents[this.randomNumber].phrase_en.length*80) //フレーズの文字数で待ち時間を変える
             this.$emit("next-quiz")
             window.addEventListener('keydown', this.keydown);
         },
