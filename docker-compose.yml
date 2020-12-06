@@ -1,0 +1,33 @@
+version: '3.2'
+
+services:
+  backend:
+    ports: 
+      - "8000:8000"
+    build: ./backend
+    container_name: 'backend'
+    volumes:
+      - ./backend:/tmp/backend 
+    
+    stdin_open: true
+    tty: true
+    command: python manage.py runserver 0:8000
+
+  frontend:
+    ports:
+      - "9050:8080"
+    build: ./frontend
+    container_name: 'frontend'
+    volumes:
+      - ./frontend:/tmp/frontend
+      - /tmp/frontend/node_modules/
+
+    stdin_open: true
+    tty: true
+    # command: pwd
+    # command: /bin/sh
+    # command: /bin/bash
+    command: >
+      bash -c "cd ../frontend && npm run serve"
+    # command: >
+    #   bash -c "cd ../frontend && pwd && ls"
