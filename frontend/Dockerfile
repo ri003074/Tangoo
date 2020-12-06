@@ -13,8 +13,14 @@ FROM node:14.3.0-buster
 #RUN npm install -g @vue/cli && \
 
 WORKDIR /tmp/frontend
-RUN npm install -g npm @vue/cli@3.5.2 && \
-    npm install @vue/cli-plugin-babel 
+COPY package-lock.json /tmp/frontend
+COPY package.json /tmp/frontend
+# RUN npm install -g npm @vue/cli@3.5.2 && \
+#     npm install
+RUN pwd && ls && pwd && \ 
+    npm install && \
+    npm install -g npm @vue/cli@3.5.2 
+    # npm install @vue/cli-plugin-babel 
     # npm i @vue/cli-service  
     # npm install @vue/cli-plugin-babel && \
     # npm install @vue/cli-plugin-eslint && \
