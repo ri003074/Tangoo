@@ -8,7 +8,6 @@ services:
     container_name: 'backend'
     volumes:
       - ./backend:/tmp/backend 
-    
     stdin_open: true
     tty: true
     command: python manage.py runserver 0:8000
@@ -21,13 +20,7 @@ services:
     volumes:
       - ./frontend:/tmp/frontend
       - /tmp/frontend/node_modules/
-
     stdin_open: true
     tty: true
-    # command: pwd
-    # command: /bin/sh
-    # command: /bin/bash
     command: >
       bash -c "cd ../frontend && npm run serve"
-    # command: >
-    #   bash -c "cd ../frontend && pwd && ls"
