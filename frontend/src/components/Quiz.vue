@@ -28,9 +28,9 @@ export default {
         }
     },
     props:{
-        contents       : { type:Array  },
-        randomNumber   : { type:Number },
-        letterLocation : { type:Number },
+        contents       : { type : Array  },
+        randomNumber   : { type : Number },
+        letterLocation : { type : Number },
     },
     created(){
         console.log("quiz created")

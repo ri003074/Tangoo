@@ -25,6 +25,7 @@ export default {
             letterLocation       : 1,
             arrayNumberForUpdate : 0,
             randomNumber         : 0,
+            isRandom             : true,
         }
     },
     components: { 
@@ -63,8 +64,11 @@ export default {
     },
     methods:{
         setRandomNum(){ //最初は乱数にしていたが、正答率が低い順に並べることにしたので、やめた。
-            // this.randomNumber = Math.floor(Math.random() * this.contents.length)
-            this.randomNumber += 1;
+            if(this.isRandom){
+                this.randomNumber = Math.floor(Math.random() * this.contents.length)
+            }else{
+                this.randomNumber += 1;
+            }
         },
         updateQuizBlank(){
             const content = this.contents[this.randomNumber]
