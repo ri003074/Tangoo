@@ -1,10 +1,10 @@
 <template>
-    <div v-if="contents[randomNumber]">
+    <div v-if="contents[quizNumber]">
         <div style="text-align:center;">
-            <div class="quiz">{{ randomNumber }}/{{ contents.length }}</div>
-            <div class="quiz">{{ contents[randomNumber].phrase_ja }} ({{ ((contents[randomNumber].c_counter / contents[randomNumber].s_counter)*100).toFixed(1) }}%)</div>
-            <div class="quiz">{{ contents[randomNumber].phrase_quiz }}</div>
-            <div class="quiz quiz_answer">{{ contents[randomNumber].word_blank }}</div>
+            <div class="quiz">{{ quizNumber }}/{{ contents.length }}</div>
+            <div class="quiz">{{ contents[quizNumber].phrase_ja }} ({{ ((contents[quizNumber].c_counter / contents[quizNumber].s_counter)*100).toFixed(1) }}%)</div>
+            <div class="quiz">{{ contents[quizNumber].phrase_quiz }}</div>
+            <div class="quiz quiz_answer">{{ contents[quizNumber].word_blank }}</div>
 
             <div v-if="isCorrect" class="mt-4">
                 <font-awesome-icon icon="thumbs-up" />
@@ -29,7 +29,7 @@ export default {
     },
     props:{
         contents       : { type : Array  },
-        randomNumber   : { type : Number },
+        quizNumber     : { type : Number },
         letterLocation : { type : Number },
     },
     created(){
@@ -50,14 +50,14 @@ export default {
     methods:{
         speak(){
             var speak = new SpeechSynthesisUtterance();
-            speak.text = this.contents[this.randomNumber].phrase_en
+            speak.text = this.contents[this.quizNumber].phrase_en
             speak.rate = 1.0
             speak.pitch = 0
             speak.lang = 'en-US'
             speechSynthesis.speak(speak)
         },
         updateCounterValue(miss){
-            const content = this.contents[this.randomNumber]
+            const content = this.contents[this.quizNumber]
             let cCounter  = content.c_counter
             if(miss<1){
                 cCounter = cCounter+1
@@ -74,14 +74,14 @@ export default {
             this.updateCounterValue(this.missCount)
             this.missCount=0
             this.speak()
-            await this.sleep(this.contents[this.randomNumber].phrase_en.length*80) //フレーズの文字数で待ち時間を変える
+            await this.sleep(this.contents[this.quizNumber].phrase_en.length*80) //フレーズの文字数で待ち時間を変える
             this.$emit("next-quiz")
             window.addEventListener('keydown', this.keydown);
         },
         keydown(event){
             console.log("keydown!")
             console.log(event.key)
-            const content = this.contents[this.randomNumber]
+            const content = this.contents[this.quizNumber]
 
             if(content.word_en[this.letterLocation] == event.key || this.missCount > 5){
                 this.music.currentTime=0;
@@ -100,9 +100,9 @@ export default {
         }
     },
     watch:{
-        randomNumber:{
+        quizNumber:{
             handler(){
-                console.log("watch randomNumber!!")
+                console.log("watch quizNumber!!")
             }
         },
         contents:{

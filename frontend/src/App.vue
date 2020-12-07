@@ -3,7 +3,7 @@
         <DisplayHeader></DisplayHeader> 
         <router-view :letterLocation = 'letterLocation' 
                      :contents       = 'contents' 
-                     :randomNumber   = 'randomNumber' 
+                     :quizNumber     = 'quizNumber' 
                      v-on:update-counter-value = "updatedCounterValue" 
                      v-on:update-quiz-blank    = "updateQuizBlank"
                      v-on:next-quiz            = "nextQuiz">
@@ -24,8 +24,8 @@ export default {
             contents             : [],
             letterLocation       : 1,
             arrayNumberForUpdate : 0,
-            randomNumber         : 0,
-            isRandom             : true,
+            quizNumber           : 0,
+            isRandom             : false,
         }
     },
     components: { 
@@ -65,15 +65,15 @@ export default {
     methods:{
         setRandomNum(){ //最初は乱数にしていたが、正答率が低い順に並べることにしたので、やめた。
             if(this.isRandom){
-                this.randomNumber = Math.floor(Math.random() * this.contents.length)
+                this.quizNumber = Math.floor(Math.random() * this.contents.length)
             }else{
-                this.randomNumber += 1;
+                this.quizNumber += 1;
             }
         },
         updateQuizBlank(){
-            const content = this.contents[this.randomNumber]
+            const content = this.contents[this.quizNumber]
             this.letterLocation++;
-            this.contents[this.randomNumber].word_blank = content.word_en.substring(0, this.letterLocation) + '_'.repeat(content.word_en.length - this.letterLocation);
+            this.contents[this.quizNumber].word_blank = content.word_en.substring(0, this.letterLocation) + '_'.repeat(content.word_en.length - this.letterLocation);
         },
         updataDatabase(){
             let data = this.contents[this.arrayNumberForUpdate] // data for updte
@@ -85,7 +85,7 @@ export default {
         },
         nextQuiz(){
             console.log("finish! go to next")
-            this.contents[this.randomNumber].word_blank = this.contents[this.randomNumber].word_en_begin + '_'.repeat(this.contents[this.randomNumber].word_en.length-1)
+            this.contents[this.quizNumber].word_blank = this.contents[this.quizNumber].word_en_begin + '_'.repeat(this.contents[this.quizNumber].word_en.length-1)
             this.setRandomNum()
             this.letterLocation = 1;
         },
