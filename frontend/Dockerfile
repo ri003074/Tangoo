@@ -1,4 +1,4 @@
-FROM node:14.3.0-buster
+FROM node:14.3.0-slim
 
 WORKDIR /tmp/frontend
 
