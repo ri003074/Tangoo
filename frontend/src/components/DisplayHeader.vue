@@ -16,6 +16,12 @@
                 <li class="nav-item">
                     <router-link to='/quiz' class="nav-link">Quiz</router-link>
                 </li>
+                <div v-if="this.$route.path == '/quiz'">
+                    <li class="nav-item">
+                        <div v-if="isRandom" class="nav-link" v-on:click="click">random </div>
+                        <div v-if="!isRandom" class="nav-link" v-on:click="click">sequential </div>
+                    </li>
+                </div>
             </ul>
             <!-- <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2 search-form" type="text" placeholder="Search" aria-label="Search">
@@ -24,6 +30,21 @@
         </div>
     </nav>
 </template>
+<script>
+export default {
+    props:{
+        isRandom : {type : Boolean}
+    },
+    methods:{
+        click(){
+            console.log(this.$route.path)
+            console.log("aaa")
+            console.log(this.isRandom)
+            this.$emit("select-random");
+        },
+    }
+}
+</script>
 
 <style lang="scss" scoped>
 // .search-form{

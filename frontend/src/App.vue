@@ -1,6 +1,9 @@
 <template>
     <div>
-        <DisplayHeader></DisplayHeader> 
+        <DisplayHeader  :isRandom = 'isRandom'
+                        v-on:select-random = "selectRandom">
+                        </DisplayHeader> 
+
         <router-view :letterLocation = 'letterLocation' 
                      :contents       = 'contents' 
                      :quizNumber     = 'quizNumber' 
@@ -66,8 +69,15 @@ export default {
         setRandomNum(){ //最初は乱数にしていたが、正答率が低い順に並べることにしたので、やめた。
             if(this.isRandom){
                 this.quizNumber = Math.floor(Math.random() * this.contents.length)
-            }else{
+            } else {
                 this.quizNumber += 1;
+            }
+        },
+        selectRandom(){
+            if(this.isRandom == true){
+                this.isRandom = false;
+            } else {
+                this.isRandom = true;
             }
         },
         updateQuizBlank(){
