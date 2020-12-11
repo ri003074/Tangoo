@@ -143,6 +143,7 @@ a {
     &:hover {
         color:$sub_moji_color;
         cursor: pointer;
+        user-select: none;
     }
 }
 </style>
