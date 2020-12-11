@@ -138,4 +138,11 @@ a {
         color:$sub_moji_color;
     }
 }
+.nav-link{
+    color:$main_moji_color;
+    &:hover {
+        color:$sub_moji_color;
+        cursor: pointer;
+    }
+}
 </style>

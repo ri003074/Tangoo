@@ -16,12 +16,10 @@
                 <li class="nav-item">
                     <router-link to='/quiz' class="nav-link">Quiz</router-link>
                 </li>
-                <div v-if="this.$route.path == '/quiz'">
-                    <li class="nav-item">
-                        <div v-if="isRandom" class="nav-link" v-on:click="click">random </div>
-                        <div v-if="!isRandom" class="nav-link" v-on:click="click">sequential </div>
-                    </li>
-                </div>
+               <li class="nav-item" v-if="this.$route.path == '/quiz'">
+                   <div v-if="isRandom" class="nav-link"  v-on:click="click">random </div>
+                   <div v-if="!isRandom" class="nav-link" v-on:click="click">sequential </div>
+               </li>
             </ul>
             <!-- <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2 search-form" type="text" placeholder="Search" aria-label="Search">
