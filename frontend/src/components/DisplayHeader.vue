@@ -17,8 +17,8 @@
                     <router-link to='/quiz' class="nav-link">Quiz</router-link>
                 </li>
                <li class="nav-item" v-if="this.$route.path == '/quiz'">
-                   <div v-if="isRandom" class="nav-link"  v-on:click="click">random </div>
-                   <div v-if="!isRandom" class="nav-link" v-on:click="click">sequential </div>
+                   <div v-if="isRandom" class="nav-link"  v-on:click="switchRandom">random </div>
+                   <div v-if="!isRandom" class="nav-link" v-on:click="switchRandom">sequential </div>
                </li>
             </ul>
         </div>
@@ -30,10 +30,7 @@ export default {
         isRandom : {type : Boolean}
     },
     methods:{
-        click(){
-            console.log(this.$route.path)
-            console.log("aaa")
-            console.log(this.isRandom)
+        switchRandom(){
             this.$emit("select-random");
         },
     }

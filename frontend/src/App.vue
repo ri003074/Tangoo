@@ -1,5 +1,4 @@
 <template>
-    <v-app>
         <div>
             <DisplayHeader  :isRandom = 'isRandom'
                             v-on:select-random = "selectRandom">
@@ -13,7 +12,6 @@
                          v-on:next-quiz            = "nextQuiz">
                          </router-view>  
         </div>
-    </v-app>
 </template>
 
 <script>

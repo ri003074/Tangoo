@@ -27,13 +27,15 @@ export default {
     methods:{
         deleteContent(contentNumber){
             let data = this.contents[contentNumber] // data for updte
-            this.contents.splice(contentNumber,1) //delete from contents
+            if(confirm("Are you sure you want to delete?")){
+                this.contents.splice(contentNumber,1) //delete from contents
 
-            axios //delete from database
-                .delete("http://localhost:8000/api/" + data.id + "/", data)
-                .then(function(response){
-                    console.log(response.data)
-                })
+                axios //delete from database
+                    .delete("http://localhost:8000/api/" + data.id + "/", data)
+                    .then(function(response){
+                        console.log(response.data)
+                    })
+            } 
         }
     }
 }
