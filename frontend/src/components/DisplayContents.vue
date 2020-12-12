@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.delete_button{
-    cursor: pointer;
-}
+    .delete_button{
+        cursor: pointer;
+    }
 </style>

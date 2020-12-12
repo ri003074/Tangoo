@@ -1,17 +1,19 @@
 <template>
-    <div>
-        <DisplayHeader  :isRandom = 'isRandom'
-                        v-on:select-random = "selectRandom">
-                        </DisplayHeader> 
-
-        <router-view :letterLocation = 'letterLocation' 
-                     :contents       = 'contents' 
-                     :quizNumber     = 'quizNumber' 
-                     v-on:update-counter-value = "updatedCounterValue" 
-                     v-on:update-quiz-blank    = "updateQuizBlank"
-                     v-on:next-quiz            = "nextQuiz">
-                     </router-view>  
-    </div>
+    <v-app>
+        <div>
+            <DisplayHeader  :isRandom = 'isRandom'
+                            v-on:select-random = "selectRandom">
+                            </DisplayHeader> 
+    
+            <router-view :letterLocation = 'letterLocation' 
+                         :contents       = 'contents' 
+                         :quizNumber     = 'quizNumber' 
+                         v-on:update-counter-value = "updatedCounterValue" 
+                         v-on:update-quiz-blank    = "updateQuizBlank"
+                         v-on:next-quiz            = "nextQuiz">
+                         </router-view>  
+        </div>
+    </v-app>
 </template>
 
 <script>
