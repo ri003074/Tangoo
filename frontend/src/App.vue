@@ -130,6 +130,9 @@ a {
     &:hover {
         color:$sub_moji_color;
     }
+    &:focus{
+      outline: none;
+    }
 }
 //TODO 何故必要かわからない
 .btn{
