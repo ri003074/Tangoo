@@ -1,6 +1,7 @@
 <template>
         <div>
-            <DisplayHeader  :isRandom = 'isRandom'
+            <DisplayHeader  :isRandom      = 'isRandom'
+                            :contentsCount = 'contentsCount'
                             v-on:select-random = "selectRandom">
                             </DisplayHeader> 
     
@@ -25,6 +26,7 @@ export default {
     data: function(){
         return {
             contents             : [],
+            contentsCount        : 0,
             letterLocation       : 1,
             arrayNumberForUpdate : 0,
             quizNumber           : 0,
@@ -43,8 +45,9 @@ export default {
             .then(function(response){
 
             let tmpData =[]
+            this.contentsCount = response.data.length;
             //Quiz用のデータを作成する。
-            for(let i=0; i<response.data.length; i++){
+            for(let i=0; i<this.contentsCount; i++){
                 const content             = response.data[i]
                 const word_en_begin       = content.word_en.slice(0,1);
                 
