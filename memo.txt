@@ -1,3 +1,10 @@
+使っている技術
+・Django restframework
+・Vue.js
+・Docker
+・Google Spreadsheet
+
+
 npm run serve
 
 
@@ -10,5 +17,7 @@ v-if="contents"でデータの存在を確かめればOK。
  →done
 
 Docker上で動かす
+→done
 正答率が低い順か、ランダムか
+→done
 テストもしたい
