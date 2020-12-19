@@ -11,6 +11,9 @@ services:
     stdin_open: true
     tty: true
     command: python manage.py runserver 0:8000
+    depends_on:
+      - db
+
 
   frontend:
     ports:
@@ -24,3 +27,12 @@ services:
     tty: true
     command: >
       bash -c "cd ../frontend && npm run serve"
+
+  db:
+    image: postgres
+    ports: 
+       - "5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

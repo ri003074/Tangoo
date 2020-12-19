@@ -13,6 +13,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: db
+        ports:
+          -  5432:5432
 
     steps:
     - uses: actions/checkout@v2
@@ -31,6 +41,7 @@ jobs:
         pip install django-multiselectfield
         pip install djangorestframework==3.12.2
         pip install django-cors-headers==3.2.1
+        pip install psycopg2
     
     - name: run test
       run: |
