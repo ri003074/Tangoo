@@ -35,6 +35,8 @@ export default {
                     .then(function(response){
                         console.log(response.data)
                     })
+
+                this.$emit("update-contents-count-value","decrement")
             } 
         }
     }

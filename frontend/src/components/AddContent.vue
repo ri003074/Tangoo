@@ -32,14 +32,16 @@ export default {
     }
   },
   methods:{
-    addData: function(){
-      axios
-      // .put("http://localhost:8000/api/" + data.id + "/",data)
-        .post("http://localhost:8000/api/",this.content)
-        .then(function(response){
-          console.log(response.data)
-      })
-    }
+      addData: function(){
+          axios
+          // .put("http://localhost:8000/api/" + data.id + "/",data)
+            .post("http://localhost:8000/api/",this.content)
+            .then(function(response){
+              console.log(response.data)
+          })
+
+      // this.$emit("update-contents-counter-value","increment")
+      }
   }
 }
 </script>

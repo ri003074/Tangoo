@@ -1,16 +1,17 @@
 <template>
         <div>
-            <DisplayHeader  :isRandom      = 'isRandom'
-                            :contentsCount = 'contentsCount'
+            <DisplayHeader  :isRandom          = 'isRandom'
+                            :contentsCount     = 'contentsCount'
                             v-on:select-random = "selectRandom">
                             </DisplayHeader> 
     
             <router-view :letterLocation = 'letterLocation' 
                          :contents       = 'contents' 
                          :quizNumber     = 'quizNumber' 
-                         v-on:update-counter-value = "updatedCounterValue" 
-                         v-on:update-quiz-blank    = "updateQuizBlank"
-                         v-on:next-quiz            = "nextQuiz">
+                         v-on:update-counter-value        = "updatedCounterValue" 
+                         v-on:update-contents-count-value = "updateContentsCountValue"
+                         v-on:update-quiz-blank           = "updateQuizBlank"
+                         v-on:next-quiz                   = "nextQuiz">
                          </router-view>  
         </div>
 </template>
@@ -72,15 +73,22 @@ export default {
         setRandomNum(){ //最初は乱数にしていたが、正答率が低い順に並べることにしたので、やめた。
             if(this.isRandom){
                 this.quizNumber = Math.floor(Math.random() * this.contents.length)
-            } else {
+            }else{
                 this.quizNumber += 1;
             }
         },
         selectRandom(){
             if(this.isRandom == true){
                 this.isRandom = false;
-            } else {
+            }else{
                 this.isRandom = true;
+            }
+        },
+        updateContentsCountValue(action){
+            if(action == "increment"){
+                this.contentsCount+=1;
+            }else if(action == "decrement"){
+                this.contentsCount-=1;
             }
         },
         updateQuizBlank(){

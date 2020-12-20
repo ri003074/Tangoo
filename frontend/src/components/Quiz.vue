@@ -92,7 +92,7 @@ export default {
                 if(this.letterLocation == content.word_en.length-1){
                     this.proceedToNextQuiz()
                 }
-            } else {
+            }else{
                 console.log("miss")
                 this.isCorrect=false
                 this.missCount++;
