@@ -1,14 +1,14 @@
 <template>
     <div>
         <form>
-            <div class="form-group">
+            <div class="form-group ml-2">
               <!-- v-model.trim, lazy, number -->
                 <input type="text" class="form-control col-4" v-model.trim="content.phrase_en" placeholder="English Phrase">
             </div>
-            <div class="form-group">
+            <div class="form-group ml-2">
                 <input type="text" class="form-control col-4" v-model.trim="content.phrase_ja" placeholder="Japanese Phrase">
             </div>
-            <div class="form-group">
+            <div class="form-group ml-2">
                 <input type="text" class="form-control col-4" v-model.trim="content.word_en" placeholder="English Word">
             </div>
             <div>
