@@ -12,7 +12,7 @@
                 <input type="text" class="form-control col-4" v-model.trim="content.word_en" placeholder="English Word">
             </div>
             <div>
-                <button class="btn my-2 my-sm-0" v-on:click="addData()">add</button>
+                <button class="btn my-2 my-sm-0 ml-2" v-on:click="addData()">add</button>
             </div>
         </form>
     </div>
