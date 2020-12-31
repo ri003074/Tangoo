@@ -12,7 +12,6 @@
             <div v-else class="mt-4">
                 <font-awesome-icon icon="thumbs-down" />
             </div>
-
         </div>
     </div>
 </template>
