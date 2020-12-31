@@ -147,6 +147,8 @@ a {
 }
 //TODO 何故必要かわからない
 .btn{
+    padding:8px !important;
+    border:none !important;
     color:$main_moji_color;
     &:hover {
         color:$sub_moji_color;
