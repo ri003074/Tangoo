@@ -20,10 +20,10 @@
                 <li class="nav-item">
                     <router-link to='/quiz' class="nav-link">Quiz</router-link>
                 </li>
-               <li class="nav-item" v-if="this.$route.path == '/quiz'">
-                   <div v-if="isRandom" class="nav-link"  v-on:click="switchRandom">random </div>
-                   <div v-if="!isRandom" class="nav-link" v-on:click="switchRandom">sequential </div>
-               </li>
+                <li class="nav-item" v-if="this.$route.path == '/quiz'">
+                    <div v-if="isRandom" class="nav-link"  v-on:click="switchRandom">random </div>
+                    <div v-if="!isRandom" class="nav-link" v-on:click="switchRandom">sequential </div>
+                </li>
             </ul>
         </div>
     </nav>
