@@ -3,7 +3,7 @@
         <form>
             <div class="form-group ml-2">
               <!-- v-model.trim, lazy, number -->
-                <input type="text" class="form-control col-4" v-model.trim="content.phrase_en" placeholder="English Phrase">
+                <input type="text" class="form-control col-4" v-model.trim="content.phrase_en" placeholder="English Phrase" autofocus>
             </div>
             <div class="form-group ml-2">
                 <input type="text" class="form-control col-4" v-model.trim="content.phrase_ja" placeholder="Japanese Phrase">
