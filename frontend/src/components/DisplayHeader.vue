@@ -25,19 +25,47 @@
                     <div v-if="!isRandom" class="nav-link" v-on:click="switchRandom">sequential </div>
                 </li>
             </ul>
+            <form class="form-inline" v-if="token === ''">
+                <input type="text" class="form-control mr-sm-2" v-model.trim="username" placeholder="username">
+                <input type="text" class="form-control mr-sm-2" v-model.trim="password" placeholder="password">
+                <div class="mr-5" v-on:click="logIn">logIn</div>
+            </form>
+
+            <div v-if="token !== ''" class="mr-5" v-on:click="logOut">logOut</div>
         </div>
     </nav>
 </template>
 <script>
+import axios from 'axios'
 export default {
+    data: function(){
+        return {
+              username  : '',
+              password  : '',
+        }
+    },
     props:{
         isRandom      : { type : Boolean },
-        contentsCount : { type : Number  }
+        contentsCount : { type : Number  },
+        token         : { type : String  },
     },
     methods:{
         switchRandom(){
             this.$emit("select-random");
         },
+        logIn(){
+            console.log("login!")
+            axios.post (`http://localhost:8000/api/v1/auth/token/login`,{username:this.username, password:this.password},{})
+            .then(function(response){
+                console.log(response.data.auth_token)
+                localStorage.setItem('token', 'Token ' + response.data.auth_token)
+                window.location.reload()
+            })
+        },
+        logOut(){
+                localStorage.setItem('token', '')
+                window.location.reload()
+        }
     }
 }
 </script>

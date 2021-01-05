@@ -31,11 +31,18 @@ export default {
       }
     }
   },
+  props:{
+      token         : { type : String  },
+  },
   methods:{
       addData: function(){
           axios
-          // .put("http://localhost:8000/api/" + data.id + "/",data)
-            .post("http://localhost:8000/api/",this.content)
+            .post("http://localhost:8000/api/",this.content,{
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': this.token
+                }
+            })
             .then(function(response){
               console.log(response.data)
           })

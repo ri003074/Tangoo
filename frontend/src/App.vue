@@ -2,12 +2,14 @@
         <div>
             <DisplayHeader  :isRandom          = 'isRandom'
                             :contentsCount     = 'contentsCount'
+                            :token             = 'token'
                             v-on:select-random = "selectRandom">
                             </DisplayHeader> 
     
             <router-view :letterLocation = 'letterLocation' 
                          :contents       = 'contents' 
                          :quizNumber     = 'quizNumber' 
+                         :token          = 'token'
                          v-on:update-counter-value        = "updatedCounterValue" 
                          v-on:update-contents-count-value = "updateContentsCountValue"
                          v-on:update-quiz-blank           = "updateQuizBlank"
@@ -32,6 +34,7 @@ export default {
             arrayNumberForUpdate : 0,
             quizNumber           : 0,
             isRandom             : false,
+            token                :'',
         }
     },
     components: { 
@@ -41,8 +44,13 @@ export default {
     //axiosによるデータ取得処理
     created(){
         console.log("axios")
+        this.token = localStorage.getItem('token')
         axios
-            .get('http://localhost:8000/api/')
+            .get('http://localhost:8000/api/',{
+                headers: {
+                    'Authorization': this.token
+                }
+            })
             .then(function(response){
 
             let tmpData =[]
