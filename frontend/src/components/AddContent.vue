@@ -22,43 +22,41 @@
 import axios from 'axios'
 
 export default {
-  data: function(){
-    return {
-      content:{
-        phrase_en  : '',
-        phrase_ja  : '',
-        word_en    : '',
-      }
+    data: function(){
+        return {
+            content:{
+                phrase_en : '',
+                phrase_ja : '',
+                word_en : '',
+            }
+        }
+    },
+    props:{
+        token : { type : String },
+    },
+    methods:{
+        addData: function(){
+            axios
+                .post("http://localhost:8000/api/",this.content,{
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': this.token
+                    }
+                })
+                .then(function(response){
+                    console.log(response.data)
+                })
+        }
     }
-  },
-  props:{
-      token         : { type : String  },
-  },
-  methods:{
-      addData: function(){
-          axios
-            .post("http://localhost:8000/api/",this.content,{
-                headers: {
-                    'Content-type': 'application/json',
-                    'Authorization': this.token
-                }
-            })
-            .then(function(response){
-              console.log(response.data)
-          })
-
-      // this.$emit("update-contents-counter-value","increment")
-      }
-  }
 }
 </script>
 
 <style lang="scss">
-.form-control {
-  border:none;;
-  &:focus{
-    border-color:$main_background_color;
-    box-shadow: none;;
-  }
-}
+    .form-control {
+        border:none;
+            &:focus{
+                border-color:$main_background_color;
+                box-shadow: none;
+        }
+    }
 </style>
